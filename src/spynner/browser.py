@@ -45,7 +45,7 @@ try:
     from PySide.QtGui import QCursor, QMouseEvent, QKeyEvent
     from PySide.QtNetwork import QNetworkCookie, QNetworkAccessManager, QSslConfiguration, QSslCipher
     from PySide.QtNetwork import QNetworkCookieJar, QNetworkRequest, QNetworkProxy, QSsl, QSslSocket
-    from PySide.QtWebKit import QWebPage, QWebView
+    from PySide.QtWebKit import QWebPage, QWebView, QWebSettings
     HAS_PYSIDE = True
 except Exception as e:
     HAS_PYSIDE = False
@@ -56,7 +56,7 @@ except Exception as e:
     from PyQt4.QtGui import QCursor, QMouseEvent, QKeyEvent
     from PyQt4.QtNetwork import QNetworkCookie, QNetworkAccessManager, QSslConfiguration, QSslCipher
     from PyQt4.QtNetwork import QNetworkCookieJar, QNetworkRequest, QNetworkProxy, QSsl, QSslSocket
-    from PyQt4.QtWebKit import QWebPage, QWebView
+    from PyQt4.QtWebKit import QWebPage, QWebView, QWebSettings
     from PyQt4.QtWebKit import QWebInspector
 
 
@@ -169,6 +169,7 @@ class Browser(object):
         self.ignore_ssl_errors = ignore_ssl_errors
         """PyQt4.QtWebKit.QWebPage object."""
         wp = self.webpage = QWebPage()
+        QWebSettings.globalSettings().setAttribute(QWebSettings.PluginsEnabled, True)
         # Network Access Manager and cookies
         #mngr = self.manager = QNetworkAccessManager()
         mngr = self.manager = NManager.new(self)
